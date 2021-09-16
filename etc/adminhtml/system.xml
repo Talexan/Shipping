@@ -33,7 +33,10 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <frontend_class>shipping-skip-hide</frontend_class>
                 </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
                 </field>
             </group>

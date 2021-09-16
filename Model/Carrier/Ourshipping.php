@@ -32,11 +32,17 @@ class Ourshipping extends AbstractCarrier implements CarrierInterface
     private $rateMethodFactory;
 
     /**
+     * @var \Magento\Checkout\Model\Cart
+     */
+    private $cart;
+
+    /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
      * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
+     * @param \Magento\Checkout\Model\Cart $cart
      * @param array $data
      */
     public function __construct(
@@ -45,12 +51,14 @@ class Ourshipping extends AbstractCarrier implements CarrierInterface
         \Psr\Log\LoggerInterface $logger,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
+        \Magento\Checkout\Model\Cart $cart,
         array $data = []
     ) {
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
 
         $this->rateResultFactory = $rateResultFactory;
         $this->rateMethodFactory = $rateMethodFactory;
+        $this->cart = $cart;
     }
 
     /**
@@ -104,11 +112,9 @@ class Ourshipping extends AbstractCarrier implements CarrierInterface
      * @return float price of shipping 
      */
     private function getRate($rateConfig){
-        $cart = \Magento\Framework\App\ObjectManager::getInstance()
-        ->get(\Magento\Checkout\Model\Cart::class);
 
-        $subtotal = $cart->getQuote()->getSubtotal();
-        $itemsQty = $cart->getQuote()->getItemsQty();
+        $subtotal = $this->cart->getQuote()->getSubtotal();
+        $itemsQty = $this->cart->getQuote()->getItemsQty();
 
         $result = $rateConfig*$subtotal/$itemsQty;
 

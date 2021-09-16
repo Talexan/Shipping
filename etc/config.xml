@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <carriers>
-            <customshipping>
+            <ourshipping>
                 <active>1</active>
                 <title>Our Shipping Inc.</title>
                 <name>Our Shipping</name>
@@ -10,7 +10,8 @@
                 <sallowspecific>0</sallowspecific>
                 <sort_order>15</sort_order>
                 <model>Talexan\Shipping\Model\Carrier\Ourshipping</model>
-            </customshipping>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+            </ourshipping>
         </carriers>
     </default>
 </config>
